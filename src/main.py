@@ -1,6 +1,7 @@
 from generate_pages_recursive import generate_pages_recursive
 import os
 import shutil
+import sys
 
 
 def the_dir_copy_function(source_dir_path, dest_dir_path):
@@ -18,15 +19,20 @@ def the_dir_copy_function(source_dir_path, dest_dir_path):
             
             
 def main():
-    target_path  = "public"
+    if len(sys.argv) > 1:
+        basepath = sys.argv[1]
+    else:
+        basepath = "/"
+    
+    target_path  = "docs"
     if os.path.exists(target_path):
         shutil.rmtree(target_path)
     os.mkdir(target_path)
     source_dir_path = "static"
-    dest_dir_path = "public"
+    dest_dir_path = "docs"
     the_dir_copy_function(source_dir_path, dest_dir_path)
     
-    generate_pages_recursive("content", "template.html", "public")
+    generate_pages_recursive("content", "template.html", "docs", basepath)
     
     
 if __name__ == "__main__":

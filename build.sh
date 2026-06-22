@@ -1,0 +1,1 @@
+python3 src/main.py "/Build_a_Static_Site_Generator/"
